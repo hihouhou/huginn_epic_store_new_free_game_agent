@@ -1,0 +1,4 @@
+require 'huginn_agent'
+
+#HuginnAgent.load 'huginn_epic_store_new_free_game_agent/concerns/my_agent_concern'
+HuginnAgent.register 'huginn_epic_store_new_free_game_agent/epic_store_new_free_game_agent'
