@@ -166,6 +166,7 @@ module Agents
     end
 
     form_configurable :expected_receive_period_in_days, type: :string
+
     def validate_options
 
       unless options['expected_receive_period_in_days'].present? && options['expected_receive_period_in_days'].to_i > 0
@@ -174,14 +175,7 @@ module Agents
     end
 
     def working?
-
-      return false if recent_error_logs?
-
-      if interpolated['expected_receive_period_in_days'].present?
-        return false unless last_receive_at && last_receive_at > interpolated['expected_receive_period_in_days'].to_i.days.ago
-      end
-
-      true
+      event_created_within?(options['expected_receive_period_in_days']) && !recent_error_logs?
     end
 
     def check
