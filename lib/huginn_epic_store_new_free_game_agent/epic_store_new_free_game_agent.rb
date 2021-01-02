@@ -213,15 +213,17 @@ module Agents
 
       payload = JSON.parse(response.body)
       payload['data']['Catalog']['searchStore']['elements'].each do |item|
-        if !item['promotions']['promotionalOffers'].blank?
-          start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
-          end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
-#          puts start_date
-#          puts end_date
-#          puts Time.parse(start_date).to_i
-#          puts Time.parse(end_date).to_i
-          if Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i)
-            create_event payload: item
+        if !item['promotions']['promotionalOffers'].nil?
+          if !item['promotions']['promotionalOffers'].empty?
+            start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
+            end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
+  #          puts start_date
+  #          puts end_date
+  #          puts Time.parse(start_date).to_i
+  #          puts Time.parse(end_date).to_i
+            if Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i)
+              create_event payload: item
+            end
           end
         end
       end
