@@ -213,7 +213,7 @@ module Agents
 
       payload = JSON.parse(response.body)
       payload['data']['Catalog']['searchStore']['elements'].each do |item|
-        if !item['promotions']['promotionalOffers'].empty?
+        if !item['promotions']['promotionalOffers'].blank?
           start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
           end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
 #          puts start_date
