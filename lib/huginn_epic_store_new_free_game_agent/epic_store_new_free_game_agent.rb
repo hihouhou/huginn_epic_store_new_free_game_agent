@@ -16,147 +16,148 @@ module Agents
 
     event_description <<-MD
       Events look like this:
-        {
-          "title": "RollerCoaster Tycoon® 3: Complete Edition",
-          "id": "4ec50a302f1449b3bf706a199c333ab8",
-          "namespace": "f01b3e0178d448f0b93911e292d8e614",
-          "description": "RollerCoaster Tycoon® 3: Complete Edition",
-          "effectiveDate": "2020-09-24T15:00:00.000Z",
-          "keyImages": [
-            {
-              "type": "OfferImageWide",
-              "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S5-1920x1080-689d96ca4d5a4e8de183b7a928960c87.jpg"
-            },
-            {
-              "type": "OfferImageTall",
-              "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S6-1200x1600-591ca93f3bee7bc55a90b77ccc36eb84.jpg"
-            },
-            {
-              "type": "DieselStoreFrontWide",
-              "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S5-1920x1080-689d96ca4d5a4e8de183b7a928960c87.jpg"
-            },
-            {
-              "type": "DieselStoreFrontTall",
-              "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S6-1200x1600-591ca93f3bee7bc55a90b77ccc36eb84.jpg"
-            },
-            {
-              "type": "Thumbnail",
-              "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S6-1200x1600-591ca93f3bee7bc55a90b77ccc36eb84.jpg"
-            },
-            {
-              "type": "CodeRedemption_340x440",
-              "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S6-1200x1600-591ca93f3bee7bc55a90b77ccc36eb84.jpg"
-            }
-          ],
-          "seller": {
-            "id": "o-mlnjydnrxlmer2ducb6u6ngznq25mx",
-            "name": "Frontier Developments"
-          },
-          "productSlug": "rollercoaster-tycoon-3-complete-edition/home",
-          "urlSlug": "mainegeneralaudience",
-          "url": null,
-          "items": [
-            {
-              "id": "d666b5e22c58413ebcf10a028d2364ee",
-              "namespace": "f01b3e0178d448f0b93911e292d8e614"
-            }
-          ],
-          "customAttributes": [
-            {
-              "key": "com.epicgames.app.blacklist",
-              "value": "[]"
-            },
-            {
-              "key": "publisherName",
-              "value": "Frontier Foundry"
-            },
-            {
-              "key": "developerName",
-              "value": "Frontier Developments"
-            },
-            {
-              "key": "com.epicgames.app.productSlug",
-              "value": "rollercoaster-tycoon-3-complete-edition/home"
-            }
-          ],
-          "categories": [
-            {
-              "path": "freegames"
-            },
-            {
-              "path": "games"
-            },
-            {
-              "path": "games/edition/base"
-            },
-            {
-              "path": "games/edition"
-            },
-            {
-              "path": "applications"
-            }
-          ],
-          "tags": [
-            {
-              "id": "1393"
-            },
-            {
-              "id": "1115"
-            },
-            {
-              "id": "9547"
-            }
-          ],
-          "price": {
-            "totalPrice": {
-              "discountPrice": 0,
-              "originalPrice": 1999,
-              "voucherDiscount": 0,
-              "discount": 1999,
-              "currencyCode": "EUR",
-              "currencyInfo": {
-                "decimals": 2
+
+          {
+            "title": "RollerCoaster Tycoon® 3: Complete Edition",
+            "id": "4ec50a302f1449b3bf706a199c333ab8",
+            "namespace": "f01b3e0178d448f0b93911e292d8e614",
+            "description": "RollerCoaster Tycoon® 3: Complete Edition",
+            "effectiveDate": "2020-09-24T15:00:00.000Z",
+            "keyImages": [
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S5-1920x1080-689d96ca4d5a4e8de183b7a928960c87.jpg"
               },
-              "fmtPrice": {
-                "originalPrice": "19,99 €",
-                "discountPrice": "0",
-                "intermediatePrice": "0"
-              }
-            },
-            "lineOffers": [
               {
-                "appliedRules": [
-                  {
-                    "id": "cbda333590a14a55a8e1edbf6b7b6b1b",
-                    "endDate": "2020-10-01T15:00:00.000Z",
-                    "discountSetting": {
-                      "discountType": "PERCENTAGE"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "promotions": {
-            "promotionalOffers": [
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S6-1200x1600-591ca93f3bee7bc55a90b77ccc36eb84.jpg"
+              },
               {
-                "promotionalOffers": [
-                  {
-                    "startDate": "2020-09-24T15:00:00.000Z",
-                    "endDate": "2020-10-01T15:00:00.000Z",
-                    "discountSetting": {
-                      "discountType": "PERCENTAGE",
-                      "discountPercentage": 0
-                    }
-                  }
-                ]
+                "type": "DieselStoreFrontWide",
+                "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S5-1920x1080-689d96ca4d5a4e8de183b7a928960c87.jpg"
+              },
+              {
+                "type": "DieselStoreFrontTall",
+                "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S6-1200x1600-591ca93f3bee7bc55a90b77ccc36eb84.jpg"
+              },
+              {
+                "type": "Thumbnail",
+                "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S6-1200x1600-591ca93f3bee7bc55a90b77ccc36eb84.jpg"
+              },
+              {
+                "type": "CodeRedemption_340x440",
+                "url": "https://cdn1.epicgames.com/f01b3e0178d448f0b93911e292d8e614/offer/EGS_RollerCoasterTycoon3CompleteEdition_FrontierDevelopments_S6-1200x1600-591ca93f3bee7bc55a90b77ccc36eb84.jpg"
               }
             ],
-            "upcomingPromotionalOffers": [
-      
-            ]
+            "seller": {
+              "id": "o-mlnjydnrxlmer2ducb6u6ngznq25mx",
+              "name": "Frontier Developments"
+            },
+            "productSlug": "rollercoaster-tycoon-3-complete-edition/home",
+            "urlSlug": "mainegeneralaudience",
+            "url": null,
+            "items": [
+              {
+                "id": "d666b5e22c58413ebcf10a028d2364ee",
+                "namespace": "f01b3e0178d448f0b93911e292d8e614"
+              }
+            ],
+            "customAttributes": [
+              {
+                "key": "com.epicgames.app.blacklist",
+                "value": "[]"
+              },
+              {
+                "key": "publisherName",
+                "value": "Frontier Foundry"
+              },
+              {
+                "key": "developerName",
+                "value": "Frontier Developments"
+              },
+              {
+                "key": "com.epicgames.app.productSlug",
+                "value": "rollercoaster-tycoon-3-complete-edition/home"
+              }
+            ],
+            "categories": [
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "games"
+              },
+              {
+                "path": "games/edition/base"
+              },
+              {
+                "path": "games/edition"
+              },
+              {
+                "path": "applications"
+              }
+            ],
+            "tags": [
+              {
+                "id": "1393"
+              },
+              {
+                "id": "1115"
+              },
+              {
+                "id": "9547"
+              }
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 0,
+                "originalPrice": 1999,
+                "voucherDiscount": 0,
+                "discount": 1999,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "19,99 €",
+                  "discountPrice": "0",
+                  "intermediatePrice": "0"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+                    {
+                      "id": "cbda333590a14a55a8e1edbf6b7b6b1b",
+                      "endDate": "2020-10-01T15:00:00.000Z",
+                      "discountSetting": {
+                        "discountType": "PERCENTAGE"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "promotions": {
+              "promotionalOffers": [
+                {
+                  "promotionalOffers": [
+                    {
+                      "startDate": "2020-09-24T15:00:00.000Z",
+                      "endDate": "2020-10-01T15:00:00.000Z",
+                      "discountSetting": {
+                        "discountType": "PERCENTAGE",
+                        "discountPercentage": 0
+                      }
+                    }
+                  ]
+                }
+              ],
+              "upcomingPromotionalOffers": [
+        
+              ]
+            }
           }
-        }
     MD
 
     def default_options
