@@ -3,7 +3,7 @@ module Agents
     include FormConfigurable
     can_dry_run!
     no_bulk_receive!
-    default_schedule '1h'
+    default_schedule 'every_1h'
 
     description do
       <<-MD
