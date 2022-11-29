@@ -245,9 +245,9 @@ module Agents
               end
             end
           else
-            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil,", ": null,")
+            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil", ": null")
             last_status = JSON.parse(last_status)
-            payload.each do | item |
+            payload['data']['Catalog']['searchStore']['elements'].each do | item |
               found = false
               if interpolated['debug'] == 'true'
                 log item
@@ -258,7 +258,7 @@ module Agents
                   if !item['promotions']['promotionalOffers'].empty?
                     start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
                     end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
-                    last_status.each do | itembis|
+                    last_status['data']['Catalog']['searchStore']['elements'].each do | itembis|
                       if item == itembis
                         found = true
                       end
