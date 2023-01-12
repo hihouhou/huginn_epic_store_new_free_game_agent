@@ -259,7 +259,7 @@ module Agents
                     start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
                     end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
                     last_status['data']['Catalog']['searchStore']['elements'].each do | itembis|
-                      if item == itembis
+                      if item['id'] == itembis['id']
                         found = true
                       end
                       if interpolated['debug'] == 'true'
@@ -268,6 +268,9 @@ module Agents
                     end
                     if found == false && Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i) && item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['discountSetting']['discountPercentage'] == 0
                       create_event payload: item
+                      log "event created"
+                    else
+                      log "event not created"
                     end
                   end
                 end
