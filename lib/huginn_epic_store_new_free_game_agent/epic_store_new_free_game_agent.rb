@@ -201,8 +201,6 @@ module Agents
 
     def fetch
       uri = URI.parse("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=fr&country=FR&allowCountries=FR")
-#      uri = URI.parse("https://run.mocky.io/v3/bd5163f5-14db-4e5d-8871-7f9f6512cd05")
-#      uri = URI.parse("https://run.mocky.io/v3/af5a0385-8d4a-4c29-948d-e2ac140819aa")
       request = Net::HTTP::Get.new(uri)
       request["Authority"] = "store-site-backend-static.ak.epicgames.com"
       request["Accept"] = "application/json, text/plain, */*"
@@ -265,7 +263,7 @@ module Agents
                     start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
                     end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
                     last_status['data']['Catalog']['searchStore']['elements'].each do | itembis|
-                      if item['id'] == itembis['id'] && (memory['triggered'].present? && !memory['triggered'].include?(item['id']))
+                      if item['id'] == itembis['id'] && memory['triggered'].include?(item['id'])
                         found = true
                       end
                       if interpolated['debug'] == 'true'
