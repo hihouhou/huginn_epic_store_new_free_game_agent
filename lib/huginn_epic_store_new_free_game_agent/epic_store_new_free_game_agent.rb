@@ -201,6 +201,8 @@ module Agents
 
     def fetch
       uri = URI.parse("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=fr&country=FR&allowCountries=FR")
+#      uri = URI.parse("https://run.mocky.io/v3/bd5163f5-14db-4e5d-8871-7f9f6512cd05")
+#      uri = URI.parse("https://run.mocky.io/v3/af5a0385-8d4a-4c29-948d-e2ac140819aa")
       request = Net::HTTP::Get.new(uri)
       request["Authority"] = "store-site-backend-static.ak.epicgames.com"
       request["Accept"] = "application/json, text/plain, */*"
@@ -228,8 +230,12 @@ module Agents
         log payload
       end
 
+      if !memory['triggered'].present?
+        memory['triggered'] = []
+      end
+
       if interpolated['changes_only'] == 'true'
-        if payload.to_s != memory['last_status']
+        if payload != memory['last_status']
           if "#{memory['last_status']}" == ''
             payload['data']['Catalog']['searchStore']['elements'].each do |item|
               if !item['promotions'].nil?
@@ -239,14 +245,14 @@ module Agents
                     end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
                     if Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i) && item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['discountSetting']['discountPercentage'] == 0
                       create_event payload: item
+                      memory['triggered'] << item['id']
                     end
                   end
                 end
               end
             end
           else
-            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil", ": null")
-            last_status = JSON.parse(last_status)
+            last_status = memory['last_status']
             payload['data']['Catalog']['searchStore']['elements'].each do | item |
               found = false
               if interpolated['debug'] == 'true'
@@ -259,7 +265,7 @@ module Agents
                     start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
                     end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
                     last_status['data']['Catalog']['searchStore']['elements'].each do | itembis|
-                      if item['id'] == itembis['id']
+                      if item['id'] == itembis['id'] && (memory['triggered'].present? && !memory['triggered'].include?(item['id']))
                         found = true
                       end
                       if interpolated['debug'] == 'true'
@@ -268,20 +274,32 @@ module Agents
                     end
                     if found == false && Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i) && item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['discountSetting']['discountPercentage'] == 0
                       create_event payload: item
+                      if interpolated['debug'] == 'true'
+                        log "adding #{item['id']} to triggered list"
+                      end
+                      memory['triggered'] << item['id']
                       log "event created"
                     else
-                      log "event not created"
+                      if interpolated['debug'] == 'true'
+                        log "event not created"
+                      end
+                    end
+                    if !Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i)
+                      if interpolated['debug'] == 'true'
+                        log "removing #{item['id']} to triggered list"
+                      end
+                      memory['triggered'].delete(item['id'])
                     end
                   end
                 end
               end
             end
           end
-          memory['last_status'] = payload.to_s
+          memory['last_status'] = payload
         end
       else
-        if payload.to_s != memory['last_status']
-          memory['last_status']= payload.to_s
+        if payload != memory['last_status']
+          memory['last_status']= payload
         end
         payload['data']['Catalog']['searchStore']['elements'].each do |item|
           create_event payload: item
