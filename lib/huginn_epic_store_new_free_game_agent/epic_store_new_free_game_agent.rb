@@ -301,7 +301,7 @@ module Agents
                         log "event not created"
                       end
                     end
-                    if !Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i)
+                    if !start_date.nil? && !end_date.nil? && !Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i)
                       if interpolated['debug'] == 'true'
                         log "removing #{item['id']} to triggered list"
                       end
