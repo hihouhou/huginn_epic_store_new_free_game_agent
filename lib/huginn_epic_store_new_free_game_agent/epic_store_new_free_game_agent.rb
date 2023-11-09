@@ -199,6 +199,17 @@ module Agents
 
     private
 
+    def log_curl_output(code,body)
+
+      log "request status : #{code}"
+
+      if interpolated['debug'] == 'true'
+        log "body"
+        log body
+      end
+
+    end
+
     def fetch
       uri = URI.parse("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=fr&country=FR&allowCountries=FR")
       request = Net::HTTP::Get.new(uri)
@@ -220,13 +231,10 @@ module Agents
       response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
         http.request(request)
       end
-      
-      log "request  status : #{response.code}"
-      payload = JSON.parse(response.body)
 
-      if interpolated['debug'] == 'true'
-        log payload
-      end
+      log_curl_output(response.code, response.body)
+
+      payload = JSON.parse(response.body)
 
       if !memory['triggered'].present?
         memory['triggered'] = []
@@ -236,12 +244,19 @@ module Agents
         if payload != memory['last_status']
           if "#{memory['last_status']}" == ''
             payload['data']['Catalog']['searchStore']['elements'].each do |item|
+              if interpolated['debug'] == 'true'
+                log item
+              end
               if !item['promotions'].nil?
                 if !item['promotions']['promotionalOffers'].nil?
                   if !item['promotions']['promotionalOffers'].empty?
-                    start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
-                    end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
-                    if Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i) && item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['discountSetting']['discountPercentage'] == 0
+                    if !item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate'].nil?
+                      start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
+                    end
+                    if !item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate'].nil?
+                      end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
+                    end
+                    if !start_date.nil? && !end_date.nil? && Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i) && item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['discountSetting']['discountPercentage'] == 0
                       create_event payload: item
                       memory['triggered'] << item['id']
                     end
@@ -260,8 +275,12 @@ module Agents
               if !item['promotions'].nil?
                 if !item['promotions']['promotionalOffers'].nil?
                   if !item['promotions']['promotionalOffers'].empty?
-                    start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
-                    end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
+                    if !item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate'].nil?
+                      start_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate']
+                    end
+                    if !item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate'].nil?
+                      end_date = item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
+                    end
                     last_status['data']['Catalog']['searchStore']['elements'].each do | itembis|
                       if item['id'] == itembis['id'] && memory['triggered'].include?(item['id'])
                         found = true
@@ -270,7 +289,7 @@ module Agents
                         log "found is #{found}"
                       end
                     end
-                    if found == false && Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i) && item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['discountSetting']['discountPercentage'] == 0
+                    if found == false && !start_date.nil? && !end_date.nil? && Time.now.to_i.between?(Time.parse(start_date).to_i, Time.parse(end_date).to_i) && item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['discountSetting']['discountPercentage'] == 0
                       create_event payload: item
                       if interpolated['debug'] == 'true'
                         log "adding #{item['id']} to triggered list"
