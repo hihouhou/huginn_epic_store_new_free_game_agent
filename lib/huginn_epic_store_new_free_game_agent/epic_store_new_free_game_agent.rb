@@ -210,6 +210,21 @@ module Agents
 
     end
 
+    def keep_only_max_ten()
+
+      if memory['triggered'].present? && memory['triggered'].length > 10
+        memory['triggered'] = memory['triggered'][-10..-1]
+        if interpolated['debug'] == 'true'
+          log "memory['triggered'] is cleaned now"
+        end
+      else
+        if interpolated['debug'] == 'true'
+          log "not enough record for already triggered offers"
+        end
+      end
+
+    end
+
     def fetch
       uri = URI.parse("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=fr&country=FR&allowCountries=FR")
       request = Net::HTTP::Get.new(uri)
@@ -322,6 +337,7 @@ module Agents
           create_event payload: item
         end
       end
+      keep_only_max_ten()
     end
   end
 end
